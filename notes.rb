@@ -76,4 +76,34 @@ p(dog1) #shortcut for the above
 class AGem < Treasure  # < indicates inheritance
 end
 
-            #makes notes on super
+#super function calls a method with the same name as the current method in the base class.
+#useful for calling the base constructor.
+#'super()' passes no arguments. 'super' passess all arguments
+
+# = at the end of the function name (no spaces) is syntactic sugar to create a setter of a classes value
+def thing=(aThing)
+    @thing = aThing
+end
+#now object.thing = 5 will set @thing to 5.
+
+#This creates  getters and setters automatically
+class SetGet
+    attr_reader :description
+    attr_writer :description
+    #or
+    attr_accessor :description
+end
+
+#A symbol is a name preceded by a :. Represents names inside the interpreter
+
+#attr_* can take lists of symbols
+#attr_reader(:name, :desc)
+
+#The C# syntax of declaring setters and getters with the property declaration is better
+
+#Standard way of finding the method in the inheritance chain. Go upwards until a match is found.
+
+#'class variables' start with @@
+#They're shared by all instances, similar to static variables in C#
+
+#.super returns a class's superclass
