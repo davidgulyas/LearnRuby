@@ -232,4 +232,97 @@ puts( %W/4 #{1+2}/ ) #creates a list with exaluating.
 
 #Charpter 4 Arrays and Hashes
 
- 
+#Arrays donn't have type restrictions.
+a = [1,"aa", 1.0]
+#First index is 0.
+x = a[0]
+#Arrays are objects defined by the Array class
+x = a[100] #returns nil if index out of bounds
+
+#Arrays execute the functions passed into their literals
+def funcA
+    return 'result'
+end
+a = [funcA, funcA] #now holds ['result', 'result']
+#Q: How do you pass a refrence to a function into a aray literal??? Normally you could not put the ()
+
+a = [`ls`] # array holds the results of the ls command run in the console
+#Q: How do you store that one without executing it? Possibly using the weird % literal notation?
+
+#Array literals can be defined by the %w and %W systax, but it's dumb.
+
+a = Array.new #new empty array Q: How do you add elements to this?
+a = Array.new(2) #empty array with 2 spaces
+a = Array.new(2, 'a') # creates ['a','a']
+
+#Q: What data structure underlies the array? Contiguous memory, or linked list? Must be linked list if an aray deosnt' have to be created with a defined size?
+
+#Multidimensional arrays are just created by assigning an array to another arays slots. Can you do circular dependancies??
+a = Array.new(1)
+a[0] = a
+puts(a)
+puts(a)
+#Q: This apparently works? It just stores a refrence to the array in the slot?
+#Q: Why does puts(a) print [...]?
+
+a = [[1,8],[7,2]] #Multidim array literal
+
+#Arrays can be looped through
+for i in a
+    for j in i
+        print(j)
+    end
+    puts()
+end
+
+a = [0,1,2,3,4,5,6]
+#Array indexes can also take ranges
+print(a[3,3])
+puts()
+print(a[0..4])
+
+#You can assign to any place in an array. Arrays never seem to care about capacity.
+#Q: If you assign to index 1000, are 1000 empty places created from 0-999? Arrays don't care what size things are in the slots so they're probably just pointers? Does a[99999999999] break ruby?
+a = []
+a[2] = 1
+puts(a[2])
+puts(a[1]) #prints empty line
+
+#You can also put spans and ranges in the assignment brackets. That's sort of weird.
+a = []
+a[0,2] = 'a','b'
+a[2..4] = 'c','d'
+puts(a)
+
+b = a #copies the refrence.
+b = a.clone #makes a duplicate array
+
+#Weird array comparison operator <=> called the spaceship operator.
+a <=> b #if a < b then return -1
+        #if a = b then return  0
+        #if a > b then return  1
+        #if a and b are not comparable then return nil
+
+#Sorting uses <=>. A lot of classes implement it.
+#<=> can't handle nil. So sometimes people write a 'block' (lambda) to handle it.
+
+#<=> is defined in the Comparable module. It can be included in a class so that <=> can be overridden.
+
+class Thing < Array #inherit form Array
+    include Comparable 
+
+    def <=> (anotherArray)
+        self.length <=> anotherArray.length
+    end
+end
+
+a = Thing.new([1,2,3])
+b = Thing.new([3,2,1])
+puts(a <=> b) #returns 0
+
+#implementing <=> gives you <. ==, and > for free
+puts(a == b)
+
+
+
+#Q: You can have a class within a class?
