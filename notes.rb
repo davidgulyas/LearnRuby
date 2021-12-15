@@ -306,7 +306,7 @@ a <=> b #if a < b then return -1
 #Sorting uses <=>. A lot of classes implement it.
 #<=> can't handle nil. So sometimes people write a 'block' (lambda) to handle it.
 
-#<=> is defined in the Comparable module. It can be included in a class so that <=> can be overridden.
+#<=> is defined in the Comparable module. It can be included in a class. This lets it be optionally overridden.
 
 class Thing < Array #inherit form Array
     include Comparable 
@@ -322,6 +322,70 @@ puts(a <=> b) #returns 0
 
 #implementing <=> gives you <. ==, and > for free
 puts(a == b)
+
+#Most array methods don't modify the array. Many do.
+#Methods ending in !
+# << concates an array onto another array
+# clear, delete, delete_at do what they say.
+
+#Arrays have set operations defined
+a & b #intersection
+a - b #difference
+a + b #concatenation. Merge into one array
+a << b #append. Puts the entire second array into an entry in the first array.
+(a << b).flatten #append and then flatten into one array.
+
+#Hashes
+
+h = Hash.new("default value") # hashes return something when the key doesn't exist. (wtf??) It can be set in the constructor.
+h = Hash.new() #returns nil as the default
+#The default can be set and get with .default
+
+#a key can be any type of object
+x = SetGet.new #x is a valid key
+
+#Hash literal
+h = {
+    'k1' => "v1",
+    9 => "v2",
+    'k3' => "v3"
+}
+puts(h[9])
+puts(h['k3'])
+
+#Like arrrays, using = creates a shallow copy. Using .clone creates a deep copy.
+#Q: Does the deep copy only go one level deep?
+
+#The .sort method expects every key to be the same data type. You can write your own comparison function
+#Uh who sorts a hash?
+def sorted_hash( aHash)
+    return aHash.sort{
+        |a,b|
+            a.to_s <=> b.to_s
+    }
+end
+
+puts("Prints out key then value. 9 is now the last key")
+x = sorted_hash(h)
+puts(x)
+
+#h.delete(somekey) #deletes an item
+#h.has_key?(someKey) #boolean saying if the key is in the hash
+#h.has_value?(someValue) #boolean saying if the value is in the hash
+#h.invert #Returns a new hash where values are keys and keys are values
+#h.keys and h.values #returns array with the chosen items
+
+#OO terminology
+#The object to which amethod belong is called a *reciever*. *Messages* are sent to objects, which receive them. Objects try and find ways to respond
+#to the messages they receive. A string instance has a reverse method, so it's able to respond to the reverse method. An integer wouldn't be able to respond.
+
+#A set class exists that enforces uniqueness. It's not included by default.
+require 'set'
+s1 = Set.new([1, 2, 1, 1])
+puts(s1)
+s2 = Set.new([1, 2, 3])
+puts(s1.merge(s2))
+
 
 
 
