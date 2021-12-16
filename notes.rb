@@ -380,11 +380,98 @@ puts(x)
 #to the messages they receive. A string instance has a reverse method, so it's able to respond to the reverse method. An integer wouldn't be able to respond.
 
 #A set class exists that enforces uniqueness. It's not included by default.
-require 'set'
+require 'set' #Q: Why is set lowercase?
 s1 = Set.new([1, 2, 1, 1])
 puts(s1)
 s2 = Set.new([1, 2, 3])
 puts(s1.merge(s2))
+
+#Chapter 5
+#Loops
+
+#Instead of for, use .each
+[1,2,3].each do |i|
+    print(i)
+end
+puts()
+
+#(1..4).each also works
+
+#Blocks (mentioned before) are lambdas. They can be preceded by ||'s with 'block parameters' in them. The paremeters are passed into the blocks scope.
+#Loops pass the iteration's loop(s) index as a block parameter into the block that makes up the loops body.
+#Blocks are mentioned in ch 10.
+
+#Loops can poass in more than one loop index
+a = [[1,2],[3,4]]
+a.each do |i,j|
+    print("#{i} #{j}")
+    puts{}
+end
+
+#Can also use {} instead of do/end
+a.each{
+  |i,j|
+    print("#{i} #{j}")
+    puts{}
+}
+
+# while loops
+x = true
+while x
+    x = false
+end
+
+x = true
+x = false while x #while can be put on the same line at the end. This is called a 'while modifier'
+#Q: are there other kinds of modifiers?
+
+x = true
+while x do x = false end #required 'do/end' since it's on the same line, before the interior of the loop
+
+#multi line loop interiors need begin/end if while is a the end
+
+x = false
+begin
+    x = true
+    x = false
+end while x
+
+#This is a bad design pattern. Behaviour shouldn't change when adding begin/end
+x = 100
+puts('thingA') while(x < 100) #doesn't execute interior
+begin puts('thingB') end while(x < 100) #does execute interior
+
+#until is a while loop that execurtes until the condition is true. Exactly the same as while.
+a = [1,2,3]
+i = 0
+until i == a.length
+    puts(a[i])
+    i += 1
+end
+
+#loop is a loop that doesn't test for a condition to break. Should include 'break' to end the loop. This probably usually leads to spaghetti code.
+#Can use {} or do/end
+i = 0
+loop do
+    puts(a[i])
+    i += 1
+    if i == a.length
+        break 
+    end
+end
+
+#collect lets you run a block on each element and returns an array with the altered elements
+a = [2,3]
+a = a.collect{|i| i*i} 
+puts(a)
+
+#Overriding the max/min comparison functions
+h = {'one'=>'for sorrow', 'two'=>'for joy'}
+#a hash passes items into blocks as arrays which contain the key,value pair.
+min = h.min{|a,b| a[1].length <=> b[1].length} #so a is ['one','for sorrow']. Here we're finding the min value (not key) in the hash
+puts(min)
+
+
 
 
 
