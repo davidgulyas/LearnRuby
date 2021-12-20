@@ -471,7 +471,16 @@ h = {'one'=>'for sorrow', 'two'=>'for joy'}
 min = h.min{|a,b| a[1].length <=> b[1].length} #so a is ['one','for sorrow']. Here we're finding the min value (not key) in the hash
 puts(min)
 
+#Chapter 6 Conditionals
 
+a = 'Monday'
+if a == 'Sat' or a == 'Sun'
+    x = 'weekend'
+else
+    x = 'weekday'
+
+if a == 'sdkfj' then puts('xxx') #then is mandatory if consequence is on the same line
+if a == 'sdfsa' : puts('xxx') #can also use a :
 
 
 
