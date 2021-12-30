@@ -479,10 +479,70 @@ if a == 'Sat' or a == 'Sun'
 else
     x = 'weekday'
 
-if a == 'sdkfj' then puts('xxx') #then is mandatory if consequence is on the same line
-if a == 'sdfsa' : puts('xxx') #can also use a :
+if a == 'Monday' then puts('xxx') end #then is mandatory if consequence is on the same line
+#if a == 'sdfsa' : puts('xxx') end #can also use a :
+#Q: The above seems to be broken. Did this syntax get removed?
+
+# There are two sets of boolean operators
+# && || !
+# and or not
+# The symbols have higher precedence than the words. (This is stupid)
+
+# elsif combines "else if"
+#The trinary operator works
+1 == 2 ? puts("nope") : puts("This should always be printed") end
+
+#The === operator tests for membership
+if (1..4) === 3 then puts("it's included") end
+#Q: Does the order of the operands matter?
+#equivalent to (1..4).include?(3)
+
+#unless is the same as
+#if !(conditional)
+unless 1 == 2
+    puts('unless')
+end
+
+#if and unless modifiers exist that can be put at the end of code blocks
+puts("modifier1") if 1 == 1
+puts("modifier2") if 1 == 2
+
+#Ruby lets you override constants, like the one that specifies which version of ruby is being used. Sort of dumb?
+#That makes constants behave like variables? A warning is generated if a constant changes.
+
+#Q: Book says that 'then' can be replaced with :. That throws an error. Why?
+#Multiple tests in one case.
+#=== is used to test if the case and argument matches
+i = 3
+case(i)
+    when (1..2) then puts("x") 
+    when 3,6,'test' then puts("case")
+    else
+        puts("xx")
+end
+
+#There is an alternate case syntax where the matching caes can also return a value.
+#I guess it's useful for knowing which case was executed.
+#It looks dumb, like an antipattern of doing to many things at once.
+
+# != exists
+
+#There are dumb syntax rules for some reason
+puts((not(1==1))) #works
+puts(not(1==1)) #Q: Also works?? Book says it doesn't
+#puts(true and true) #Causes error Q: Why??
+puts(((true) and (true))) #Works
+#WTF
+
+#There are catch and throw keywords that act like goto's a little bit.
+#The book doesn't give a good description of them. Apparently they're often used to skip execution of code
+#if something is off
+#Q: do people use catch/throw?
+
+#Chapter 7 Methods
 
 
 
 
-#Q: You can have a class within a class?
+
+#Q: You can have a class within a class? 
